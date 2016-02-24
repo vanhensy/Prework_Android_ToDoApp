@@ -30,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        readItems();
         lvItems = (ListView) findViewById(R.id.lvItems);
         items = new ArrayList<>();
+        readItems();
         itemsAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, items);
         lvItems.setAdapter(itemsAdapter);
         setupListViewListener();
@@ -54,9 +54,14 @@ public class MainActivity extends AppCompatActivity {
     public void onAddItem(View v) {
         EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
         String itemText = etNewItem.getText().toString();
-        itemsAdapter.add(itemText);
-        etNewItem.setText("");
-        writeItems();
+        if (itemText.isEmpty()) {
+
+        } else {
+            itemsAdapter.add(itemText);
+            etNewItem.setText("");
+            writeItems();
+        }
+
     }
 
     private void readItems() {
