@@ -21,5 +21,5 @@ Some small Added Feature:
 - [x] Avoid Empty input 
 - [x] Auto sync to github directly in Android Studio
 
-Screenshot : <img src="http://vanhensy.com/img/screenshot-1.png"/>
+Screenshot : <img src="blob:https%3A//mail.google.com/980094ca-7214-4b06-9f87-5f8c81f553b0"/>
 
