@@ -22,4 +22,4 @@ Some small Added Feature:
 - [x] Auto sync to github directly in Android Studio
 
 Some Screenshot : <br/>
-![Screenshot Day 1](http://vanhensy.com/img/screenshot-1.png)
+<img alt="Screenshot Day 1" width="300px" src="http://vanhensy.com/img/screenshot-1.png"/>
