@@ -7,16 +7,20 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.apache.commons.io.FileUtils;
@@ -54,19 +58,51 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 // Click action
-                EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
-                Button btnAddItem = (Button)findViewById(R.id.btnAddItem);
-                etNewItem.setVisibility(View.VISIBLE);
-                btnAddItem.setVisibility(View.VISIBLE);
                 fabAddBtn.hide();
-                etNewItem.requestFocus();
                 InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, 0);
+                EditText etNewItem = (EditText) findViewById(R.id.etNewItem);
+                LinearLayout linearAddField = (LinearLayout)findViewById(R.id.linearAddField);
+                linearAddField.setVisibility(View.VISIBLE);
+                etNewItem.requestFocus();
             }
         });
 
-    }
+        // Handle onEditTextDone()
 
+        ((EditText)findViewById(R.id.etNewItem)).setOnEditorActionListener(
+                new EditText.OnEditorActionListener() {
+                    @Override
+                    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                        if (actionId == EditorInfo.IME_ACTION_SEARCH ||
+                                actionId == EditorInfo.IME_ACTION_DONE ||
+                                event.getAction() == KeyEvent.ACTION_DOWN && event.getKeyCode() == KeyEvent.KEYCODE_BACK ||
+                                event.getAction() == KeyEvent.ACTION_DOWN &&
+                                        event.getKeyCode() == KeyEvent.KEYCODE_ENTER
+                                ) {
+                            // Hide keyboard and form
+                            LinearLayout linearAddField = (LinearLayout)findViewById(R.id.linearAddField);
+                            linearAddField.setVisibility(View.INVISIBLE);
+                            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                            // Show FAB
+                            final FloatingActionButton fabAddBtn = (FloatingActionButton) findViewById(R.id.fabAddBtn);
+                            fabAddBtn.show();
+                            return true;
+                        }
+                        return false;
+                    }
+                });
+    }
+    @Override
+    public void onBackPressed() {
+        // Hide keyboard and form
+        LinearLayout linearAddField = (LinearLayout)findViewById(R.id.linearAddField);
+        linearAddField.setVisibility(View.INVISIBLE);
+        // Show FAB
+        final FloatingActionButton fabAddBtn = (FloatingActionButton) findViewById(R.id.fabAddBtn);
+        fabAddBtn.show();
+    }
     private final int REQUEST_CODE = 20;
     private void setupListViewListener() {
         lvItems.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
@@ -110,16 +146,18 @@ public class MainActivity extends AppCompatActivity {
             itemsAdapter.add(itemText);
             etNewItem.setText("");
             writeItems();
+            lvItems.setSelection(itemsAdapter.getCount()-1);
+        } else {
+            // Hide keyboard and form
+            LinearLayout linearAddField = (LinearLayout)findViewById(R.id.linearAddField);
+            linearAddField.setVisibility(View.INVISIBLE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            // Show FAB
+            final FloatingActionButton fabAddBtn = (FloatingActionButton) findViewById(R.id.fabAddBtn);
+            fabAddBtn.show();
         }
-        // Hide keyboard and form
-        Button btnAddItem = (Button)findViewById(R.id.btnAddItem);
-        etNewItem.setVisibility(View.INVISIBLE);
-        btnAddItem.setVisibility(View.INVISIBLE);
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-        // Show FAB
-        final FloatingActionButton fabAddBtn = (FloatingActionButton) findViewById(R.id.fabAddBtn);
-        fabAddBtn.show();
+
 
     }
 

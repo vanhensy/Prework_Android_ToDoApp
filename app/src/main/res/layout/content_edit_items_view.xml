@@ -18,17 +18,16 @@
         android:id="@+id/editItemField"
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_toStartOf="@+id/btnSaveEditedItem" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Save"
         android:id="@+id/btnSaveEditedItem"
-        android:layout_below="@+id/editItemField"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="51dp"
-        android:onClick="onSaveBtnClicked"/>
+        android:onClick="onSaveBtnClicked"
+        android:layout_alignBottom="@+id/editItemField"
+        android:layout_alignParentEnd="true" />
 
     <ViewAnimator
         android:layout_width="wrap_content"
@@ -36,4 +35,16 @@
         android:id="@+id/viewAnimator"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true" />
+
+    <DatePicker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/datePicker"
+        android:foregroundTint="@color/colorAccent"
+        android:datePickerMode="spinner"
+        android:calendarViewShown="false"
+        android:layout_below="@+id/btnSaveEditedItem"
+        android:layout_alignParentStart="true"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_alignEnd="@+id/btnSaveEditedItem" />
 </RelativeLayout>

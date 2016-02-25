@@ -4,37 +4,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="0dp"
+    android:paddingLeft="0dp"
+    android:paddingRight="0dp"
+    android:paddingTop="0dp"
+    android:background="#f2f2f2"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.vanhensy.tododemo.MainActivity"
     tools:showIn="@layout/activity_main">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Item"
-        android:id="@+id/btnAddItem"
-        android:onClick="onAddItem"
-        android:visibility="invisible"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etNewItem"
-        android:layout_alignBottom="@+id/btnAddItem"
-        android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/btnAddItem"
-        android:visibility="invisible" />
-
     <ListView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="490dp"
         android:id="@+id/lvItems"
         android:layout_alignParentTop="true"
-        android:layout_above="@+id/etNewItem" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_gravity="left|top"
+        android:layout_alignParentEnd="false"
+        android:layout_above="@+id/linearAddField"
+        android:padding="5dp" />
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentBottom="true"
+        android:id="@+id/linearAddField"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/shadow"
+        android:visibility="invisible">
+
+        <EditText
+            android:layout_width="300dp"
+            android:layout_height="match_parent"
+            android:id="@+id/etNewItem"
+            android:visibility="visible"
+            android:layout_gravity="bottom|left|right|top"
+            android:singleLine="true"
+            android:background="@android:color/transparent"
+            android:gravity="center_vertical"
+            android:paddingLeft="10dp"
+            android:textSize="15dp" />
+
+        <ImageButton
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:id="@+id/btnAddItem"
+            android:onClick="onAddItem"
+            android:visibility="visible"
+            android:background="#fff"
+            android:tint="@color/colorAccent"
+            android:src="@drawable/ic_send_30dp"
+            android:layout_gravity="bottom|right|top" />
+    </LinearLayout>
+
 </RelativeLayout>
