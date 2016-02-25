@@ -9,32 +9,31 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.vanhensy.tododemo.MainActivity"
-    tools:showIn="@layout/activity_main">
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Add Item"
-        android:id="@+id/btnAddItem"
-        android:onClick="onAddItem"
-        android:visibility="invisible"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true" />
+    tools:context="com.vanhensy.tododemo.EditItemsView"
+    tools:showIn="@layout/activity_edit_items_view">
 
     <EditText
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/etNewItem"
-        android:layout_alignBottom="@+id/btnAddItem"
+        android:id="@+id/editItemField"
+        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
-        android:layout_toStartOf="@+id/btnAddItem"
-        android:visibility="invisible" />
+        android:layout_alignParentEnd="true" />
 
-    <ListView
+    <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/lvItems"
-        android:layout_alignParentTop="true"
-        android:layout_above="@+id/etNewItem" />
+        android:text="Save"
+        android:id="@+id/btnSaveEditedItem"
+        android:layout_below="@+id/editItemField"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="51dp"
+        android:onClick="onSaveBtnClicked"/>
+
+    <ViewAnimator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/viewAnimator"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true" />
 </RelativeLayout>
